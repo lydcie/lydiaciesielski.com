@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project — Lydia Ciesielski</title>
+    <meta
+      name="description"
+      content="Project detail page for the portfolio of artist and designer Lydia Ciesielski."
+    />
+    <link rel="icon" href="images/favicon.svg?v=20260809-5" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body data-page="project">
+    <div class="site-shell">
+      <header class="site-header" data-header>
+        <a class="site-signature" href="index.html" aria-label="Go to homepage">
+          <span class="site-signature__first" data-name-first></span>
+          <span class="site-signature__last" data-name-last></span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-menu"
+          data-menu-button
+        >
+          Menu
+        </button>
+
+        <nav class="site-nav" id="site-menu" data-menu>
+          <a href="index.html#work" data-nav-link>Work</a>
+          <a href="index.html#about" data-nav-link>About</a>
+          <a href="index.html#contact" data-nav-link>Contact</a>
+        </nav>
+      </header>
+
+      <main class="project-page" data-project-page>
+        <p class="project-page__back"><a href="index.html#work">Back to work</a></p>
+
+        <section class="project-hero" data-project-hero hidden>
+          <div class="project-hero__meta">
+            <p class="project-hero__code" data-project-code></p>
+            <p class="project-hero__category" data-project-category></p>
+          </div>
+
+          <div class="project-hero__heading">
+            <h1 data-project-title></h1>
+            <p class="project-hero__year" data-project-year></p>
+          </div>
+
+          <div class="project-hero__summary">
+            <p class="project-hero__description" data-project-description></p>
+
+            <dl class="project-facts" data-project-facts></dl>
+            <div class="project-notes" data-project-notes></div>
+          </div>
+        </section>
+
+        <section class="project-gallery" data-project-gallery hidden></section>
+        <section class="project-extra" data-project-extra hidden></section>
+
+        <nav class="project-pagination" aria-label="Project navigation" data-project-pagination hidden>
+          <a class="project-pagination__link" data-project-prev></a>
+          <a class="project-pagination__link project-pagination__link--next" data-project-next></a>
+        </nav>
+
+        <section class="project-missing" data-project-missing hidden>
+          <p class="eyebrow">Project not found</p>
+          <h1>There is no project at this address.</h1>
+          <p><a href="index.html#work">Return to the work index</a></p>
+        </section>
+      </main>
+
+      <footer class="site-footer" aria-label="Site legal information">
+        <p class="site-footer__copyright">&copy; 2026 Lydia Ciesielski</p>
+        <a class="site-footer__link" href="impressum.html">Impressum & Datenschutz</a>
+      </footer>
+    </div>
+
+    <script type="module" src="js/project.js"></script>
+  </body>
+</html>

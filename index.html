@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lydia Ciesielski</title>
+    <meta
+      name="description"
+      content="Portfolio of artist and designer Lydia Ciesielski, working across material, object, space, craft, and conceptual practice."
+    />
+    <link rel="icon" href="images/favicon.svg?v=20260809-5" type="image/svg+xml" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body data-page="home">
+    <div class="site-shell">
+      <header class="site-header" data-header>
+        <a class="site-signature" href="index.html" aria-label="Go to homepage">
+          <span class="site-signature__first" data-name-first></span>
+          <span class="site-signature__last" data-name-last></span>
+        </a>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-menu"
+          data-menu-button
+        >
+          Menu
+        </button>
+
+        <nav class="site-nav" id="site-menu" data-menu>
+          <a href="#work" data-nav-link>Work</a>
+          <a href="#about" data-nav-link>About</a>
+          <a href="#contact" data-nav-link>Contact</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="intro-title">
+          <div class="intro__identity">
+            <p class="eyebrow" data-identity-kicker></p>
+            <h1 class="intro__name" id="intro-title">
+              <span data-name-first></span>
+              <span data-name-last></span>
+            </h1>
+          </div>
+
+          <div class="intro__copy">
+            <p class="intro__descriptor" data-home-descriptor></p>
+            <p class="intro__text" data-home-intro></p>
+            <div class="intro__annotations" data-home-annotations></div>
+          </div>
+
+        </section>
+
+        <section class="work-index section-anchor" id="work" aria-labelledby="work-title">
+          <div class="section-head">
+            <p class="section-number">01</p>
+            <h2 class="section-title" id="work-title">Selected work</h2>
+          </div>
+          <ol class="project-index" data-project-index></ol>
+        </section>
+
+        <section class="about section-anchor" id="about" aria-labelledby="about-title">
+          <div class="section-head">
+            <p class="section-number">02</p>
+            <h2 class="section-title" id="about-title">About</h2>
+          </div>
+
+          <div class="about__layout">
+            <figure class="about__portrait">
+              <img
+                src="images/portrait.jpg"
+                alt="Portrait placeholder for the artist in profile."
+                width="577"
+                height="1280"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <div class="about__content">
+              <p class="about__lede" data-about-lede></p>
+              <div class="about__text" data-about-body></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="contact section-anchor" id="contact" aria-labelledby="contact-title">
+          <div class="section-head">
+            <p class="section-number">03</p>
+            <h2 class="section-title" id="contact-title">Contact</h2>
+          </div>
+
+          <div class="contact__layout">
+            <p class="contact__note" data-contact-note></p>
+            <ul class="contact__list" data-contact-list></ul>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer" aria-label="Site legal information">
+        <p class="site-footer__copyright">&copy; 2026 Lydia Ciesielski</p>
+        <a class="site-footer__link" href="impressum.html">Impressum & Datenschutz</a>
+      </footer>
+    </div>
+
+    <script type="module" src="js/site.js"></script>
+  </body>
+</html>
