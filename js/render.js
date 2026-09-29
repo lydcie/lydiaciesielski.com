@@ -151,6 +151,30 @@ export const initMenu = () => {
   });
 };
 
+export const initHomeSignatureReveal = () => {
+  const compactSignature = document.querySelector(".site-signature");
+  const heroName = document.querySelector(".intro__name");
+
+  if (!compactSignature || !heroName) {
+    return;
+  }
+
+  const hiddenClass = "site-signature--concealed";
+  compactSignature.classList.add(hiddenClass);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const [entry] = entries;
+      compactSignature.classList.toggle(hiddenClass, entry.isIntersecting);
+    },
+    {
+      threshold: 0.06,
+    }
+  );
+
+  observer.observe(heroName);
+};
+
 export const renderHomePage = () => {
   const descriptor = document.querySelector("[data-home-descriptor]");
   const intro = document.querySelector("[data-home-intro]");
@@ -161,14 +185,37 @@ export const renderHomePage = () => {
   const contactList = document.querySelector("[data-contact-list]");
   const projectIndex = document.querySelector("[data-project-index]");
 
-  descriptor.textContent = siteData.identity.descriptor;
-  intro.textContent = siteData.home.intro;
+  const descriptorText = siteData.identity.descriptor;
+  descriptor.innerHTML = descriptorText.replace(
+    "ritual, material become memory, and",
+    'ritual,<br class="intro__descriptor-break-mobile">material become memory,<br>and'
+  );
+  intro.innerHTML = siteData.home.intro.replace(
+    "What we see in something becomes",
+    'What we see in something <br class="intro__text-break-desktop">becomes'
+  );
   aboutLede.textContent = siteData.about.lede;
-  contactNote.textContent = siteData.contact.note;
+  contactNote.innerHTML = siteData.contact.note.replace("exhibitions and", "exhibitions<br>and");
 
-  siteData.home.annotations.forEach((item) => {
-    annotations.appendChild(createElement("p", "intro__annotation", item));
-  });
+  const lead = siteData.home.annotations[0].replace(/\.+$/, "").trim();
+  const tailFirst = "objects, installations,";
+  const tailSecond = "situations & sometimes mistakes";
+  const annotation = createElement("p", "intro__annotation intro__annotation--single");
+  const ruleNode = createElement("span", "intro__annotation-rule");
+  const firstLineNode = createElement(
+    "span",
+    "intro__annotation-line intro__annotation-line--first",
+    `${lead} ${tailFirst}`
+  );
+  const secondLineNode = createElement(
+    "span",
+    "intro__annotation-line intro__annotation-line--second",
+    tailSecond
+  );
+
+  ruleNode.setAttribute("aria-hidden", "true");
+  annotation.append(ruleNode, firstLineNode, secondLineNode);
+  annotations.appendChild(annotation);
 
   siteData.about.body.forEach((paragraph) => {
     aboutBody.appendChild(createElement("p", "", paragraph));
@@ -313,7 +360,13 @@ export const renderProjectPage = (project) => {
 
   document.querySelector("[data-project-code]").textContent = `P-${project.number}`;
   document.querySelector("[data-project-category]").textContent = project.category;
-  document.querySelector("[data-project-title]").textContent = project.title;
+  const projectTitleNode = document.querySelector("[data-project-title]");
+  if (project.slug === "p02-zweihundertsechs") {
+    projectTitleNode.classList.add("project-hero__title--split");
+    projectTitleNode.innerHTML = `<span>±zwei</span><span>hundert</span><span>sechs</span>`;
+  } else {
+    projectTitleNode.textContent = project.title;
+  }
   document.querySelector("[data-project-year]").textContent = project.year;
   document.querySelector("[data-project-description]").textContent = project.description;
 
