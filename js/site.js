@@ -1,6 +1,13 @@
-import { applyIdentity, initHomeSignatureReveal, initMenu, renderHomePage } from "./render.js";
+import {
+	applyIdentity,
+	initCustomCursor,
+	initHomeSignatureReveal,
+	initMenu,
+	renderHomePage,
+} from "./render.js";
 
 applyIdentity();
 initMenu();
 renderHomePage();
 initHomeSignatureReveal();
+initCustomCursor();

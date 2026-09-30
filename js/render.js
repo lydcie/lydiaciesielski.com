@@ -175,6 +175,84 @@ export const initHomeSignatureReveal = () => {
   observer.observe(heroName);
 };
 
+export const initCustomCursor = () => {
+  const supportsDesktopHover = window.matchMedia(
+    "(hover: hover) and (pointer: fine) and (min-width: 821px)"
+  ).matches;
+
+  if (!supportsDesktopHover) {
+    return;
+  }
+
+  const clickableSelector = "a[href], button";
+  const dot = document.createElement("span");
+  dot.className = "custom-cursor-dot";
+  dot.setAttribute("aria-hidden", "true");
+  document.body.appendChild(dot);
+
+  let activeTarget = null;
+  let rafId = 0;
+  let pointerX = -100;
+  let pointerY = -100;
+
+  const paint = () => {
+    dot.style.setProperty("--x", `${pointerX}px`);
+    dot.style.setProperty("--y", `${pointerY}px`);
+    rafId = 0;
+  };
+
+  const moveDot = (event) => {
+    pointerX = event.clientX;
+    pointerY = event.clientY;
+
+    if (!rafId) {
+      rafId = requestAnimationFrame(paint);
+    }
+  };
+
+  const setActiveTarget = (target) => {
+    if (activeTarget === target) {
+      return;
+    }
+
+    if (activeTarget) {
+      activeTarget.classList.remove("custom-cursor-target");
+    }
+
+    activeTarget = target;
+
+    if (activeTarget) {
+      activeTarget.classList.add("custom-cursor-target");
+      document.body.classList.add("custom-cursor-active");
+      dot.classList.add("is-visible");
+      return;
+    }
+
+    document.body.classList.remove("custom-cursor-active");
+    dot.classList.remove("is-visible");
+  };
+
+  document.addEventListener("pointermove", (event) => {
+    const target = event.target.closest(clickableSelector);
+    setActiveTarget(target);
+    moveDot(event);
+  });
+
+  document.addEventListener("pointerdown", (event) => {
+    if (event.target.closest(clickableSelector)) {
+      dot.classList.add("is-pressed");
+    }
+  });
+
+  document.addEventListener("pointerup", () => {
+    dot.classList.remove("is-pressed");
+  });
+
+  document.addEventListener("pointerleave", () => {
+    setActiveTarget(null);
+  });
+};
+
 export const renderHomePage = () => {
   const descriptor = document.querySelector("[data-home-descriptor]");
   const intro = document.querySelector("[data-home-intro]");
@@ -188,7 +266,7 @@ export const renderHomePage = () => {
   const descriptorText = siteData.identity.descriptor;
   descriptor.innerHTML = descriptorText.replace(
     "ritual, material become memory, and",
-    'ritual,<br class="intro__descriptor-break-mobile">material become memory,<br>and'
+    'ritual, <br class="intro__descriptor-break-mobile">material become memory,<br>and'
   );
   intro.innerHTML = siteData.home.intro.replace(
     "What we see in something becomes",

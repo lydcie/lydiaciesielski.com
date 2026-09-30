@@ -476,6 +476,55 @@ body[data-page="impressum"] .site-shell {
   transform: translate3d(0, -0.2rem, 0) scale(1.018);
 }
 
+.custom-cursor-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 32px;
+  height: 32px;
+  pointer-events: none;
+  transform: translate3d(calc(var(--x, -100px) - 50%), calc(var(--y, -100px) - 50%), 0);
+  z-index: 60;
+}
+
+.custom-cursor-dot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  transform: scale(0.8);
+  filter: blur(2px);
+  transition: opacity 140ms ease, transform 140ms ease, filter 140ms ease;
+}
+
+.custom-cursor-dot.is-visible::before {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.custom-cursor-dot.is-pressed::before {
+  transform: scale(0.96);
+}
+
+body.custom-cursor-active .custom-cursor-target,
+body.custom-cursor-active .custom-cursor-target * {
+  cursor: none !important;
+}
+
+@media (hover: none), (pointer: coarse), (max-width: 820px) {
+  .custom-cursor-dot {
+    display: none;
+  }
+
+  body.custom-cursor-active .custom-cursor-target,
+  body.custom-cursor-active .custom-cursor-target * {
+    cursor: auto !important;
+  }
+}
+
 .project-tease__meta {
   display: flex;
   justify-content: space-between;
@@ -1120,10 +1169,11 @@ body[data-page="impressum"] .site-shell {
     padding-top: clamp(0.55rem, 1.7svh, 0.9rem);
     width: auto;
     max-width: none;
-    margin-left: 25%;
-    margin-right: 1.75rem;
+    margin-left: 20vw;
+    margin-right: 24px;
+    max-width: calc(100% - 20vw - 24px);
     margin-top: 0;
-    transform: translateY(-3rem);
+    transform: translateY(-2.7rem);
   }
 
   .intro__descriptor,
@@ -1358,7 +1408,7 @@ body[data-page="impressum"] .site-shell {
   }
 
   .intro__copy {
-    transform: translateY(-3rem);
+    transform: translateY(-2.7rem);
   }
 
   .intro__descriptor {

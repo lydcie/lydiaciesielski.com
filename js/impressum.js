@@ -1,4 +1,5 @@
-import { applyIdentity, initMenu } from "./render.js";
+import { applyIdentity, initCustomCursor, initMenu } from "./render.js";
 
 applyIdentity();
 initMenu();
+initCustomCursor();
