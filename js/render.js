@@ -266,7 +266,7 @@ export const renderHomePage = () => {
   const descriptorText = siteData.identity.descriptor;
   descriptor.innerHTML = descriptorText.replace(
     "ritual, material become memory, and",
-    'ritual, <br class="intro__descriptor-break-mobile">material become memory,<br>and'
+    'ritual, <br class="intro__descriptor-break-mobile">material become memory, <br class="intro__descriptor-break-desktop"> and'
   );
   intro.innerHTML = siteData.home.intro.replace(
     "What we see in something becomes",

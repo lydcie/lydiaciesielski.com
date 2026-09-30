@@ -294,6 +294,10 @@ body[data-page="impressum"] .site-shell {
   display: none;
 }
 
+.intro__descriptor-break-desktop {
+  display: block;
+}
+
 .intro__text-break-desktop {
   display: block;
 }
@@ -1182,8 +1186,11 @@ body.custom-cursor-active .custom-cursor-target * {
   }
 
   .intro__descriptor {
-    max-width: calc(100% - 30px);
-    padding-right: 30px;
+    max-width: none;
+    width: calc(100% + 7vw);
+    margin-left: -7vw;
+    margin-top: clamp(0.35rem, 1.2svh, 0.6rem);
+    padding-right: 24px;
     box-sizing: border-box;
   }
 
@@ -1228,6 +1235,10 @@ body.custom-cursor-active .custom-cursor-target * {
   .intro__annotation-break-mobile,
   .intro__text-break-mobile {
     display: block;
+  }
+
+  .intro__descriptor-break-desktop {
+    display: none;
   }
 
   .intro__descriptor {
