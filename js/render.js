@@ -34,6 +34,42 @@ const createImage = (image, eager = false) => {
   return img;
 };
 
+const createVideo = (video, label) => {
+  const element = document.createElement("video");
+  element.src = video.src;
+  element.autoplay = true;
+  element.loop = true;
+  element.muted = true;
+  element.playsInline = true;
+  element.controls = false;
+  element.preload = "metadata";
+  element.setAttribute("playsinline", "");
+  element.setAttribute("muted", "");
+  element.setAttribute("aria-label", label);
+
+  if (video.poster) {
+    element.poster = video.poster;
+  }
+
+  element.addEventListener(
+    "loadedmetadata",
+    () => {
+      element.play().catch(() => {});
+    },
+    { once: true }
+  );
+
+  return element;
+};
+
+const createMedia = (item, eager = false) => {
+  if (item.video) {
+    return createVideo(item.video, item.alt || item.caption || "Project video");
+  }
+
+  return createImage(item, eager);
+};
+
 const styleFromLayout = (layout = {}) => {
   const styles = [];
 
@@ -405,7 +441,7 @@ const renderGalleryItems = (items, label) => {
       `gallery-item gallery-item--${item.layout?.variant || "wide"}`
     );
     figure.style.cssText = styleFromLayout(item.layout);
-    figure.appendChild(createImage(item));
+    figure.appendChild(createMedia(item));
 
     if (item.caption) {
       figure.appendChild(createElement("figcaption", "gallery-item__caption", item.caption));
@@ -465,7 +501,7 @@ export const renderProjectPage = (project) => {
       `gallery-item gallery-item--${item.layout?.variant || "wide"}`
     );
     figure.style.cssText = styleFromLayout(item.layout);
-    figure.appendChild(createImage(item, index === 0));
+    figure.appendChild(createMedia(item, index === 0));
 
     if (item.caption) {
       figure.appendChild(createElement("figcaption", "gallery-item__caption", item.caption));

@@ -795,6 +795,13 @@ body.custom-cursor-active .custom-cursor-target * {
   object-fit: cover;
 }
 
+.gallery-item video {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: rgba(255, 255, 255, 0.45);
+}
+
 .gallery-item--tall img {
   aspect-ratio: 3 / 4.4;
 }
